@@ -15,6 +15,11 @@ import '@/utils/filter' // base filter
 import PermissionHelper from '@/utils/helper/permission'
 import { removeLoadingAnimate } from '@/utils/util'
 
+import vueztree from 'vue-ztree-2.0/dist/vue-ztree-2.0.umd.min.js'
+import 'vue-ztree-2.0/dist/vue-ztree-2.0.css'
+
+Vue.use(vueztree)
+
 import {
   ACCESS_TOKEN,
   DEFAULT_COLOR,

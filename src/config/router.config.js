@@ -63,7 +63,13 @@ export const asyncRouterMap = [
             name: 'AdvanceForm',
             component: () => import('@/views/form/advancedForm/AdvancedForm'),
             meta: { title: '高级表单', permission: [ 'form' ] }
-          }
+          },
+          {
+            path: '/form/ztree-demo',
+            name: 'ZtreeDemo',
+            component: () => import('@/views/form/ZtreeDemo'),
+            meta: { title: 'zTreeDemo', permission: [ 'form' ] }
+          },
         ]
       },
 

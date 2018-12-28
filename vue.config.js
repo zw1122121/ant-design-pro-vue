@@ -75,5 +75,6 @@ module.exports = {
     }
   },
 
-  lintOnSave: undefined
+  lintOnSave: undefined,
+  runtimeCompiler: true
 }
