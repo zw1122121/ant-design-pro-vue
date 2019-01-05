@@ -25,7 +25,7 @@ export function triggerWindowResizeEvent() {
  * @param id parent element id or class
  * @param timeout
  */
-export function removeLoadingAnimate(id = '', timeout = 1500) {
+export function destroyLoadingAnimate(id = '', timeout = 1500) {
   if (id === '') {
     return
   }
