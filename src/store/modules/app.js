@@ -22,7 +22,8 @@ const app = {
     fixSiderbar: false,
     autoHideHeader: false,
     color: null,
-    weak: false
+    weak: false,
+    globalLoading: false
   },
   mutations: {
     SET_SIDEBAR_TYPE: (state, type) => {
@@ -70,6 +71,9 @@ const app = {
     TOGGLE_WEAK: (state, flag) => {
       Vue.ls.set(DEFAULT_COLOR_WEAK, flag)
       state.weak = flag
+    },
+    TOGGLE_LOADING: (state, loading) => {
+      state.globalLoading = loading
     }
   },
   actions: {
@@ -108,6 +112,9 @@ const app = {
     },
     ToggleWeak ({ commit }, weakFlag) {
       commit('TOGGLE_WEAK', weakFlag)
+    },
+    ToggleLoading ({ commit }, loading) {
+      commit('TOGGLE_LOADING', loading)
     }
   }
 }

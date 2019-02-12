@@ -1,12 +1,15 @@
 <template>
   <a-locale-provider :locale="locale">
     <div id="app">
-      <router-view/>
+      <a-spin :spinning="globalLoading" wrapperClassName="top-loading">
+        <router-view />
+      </a-spin>
     </div>
   </a-locale-provider>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import { deviceEnquire, DEVICE_TYPE } from '@/utils/device'
 
@@ -16,7 +19,17 @@ export default {
       locale: zhCN
     }
   },
+  computed: {
+    ...mapState({
+      globalLoading: state => state.app.globalLoading
+    })
+  },
   mounted () {
+    console.log(this.globalLoading)
+    this.$loading.show()
+    setTimeout(() => {
+      this.$loading.hide()
+    }, 3000)
     const { $store } = this
     deviceEnquire(deviceType => {
       switch (deviceType) {
@@ -41,6 +54,12 @@ export default {
 </script>
 <style>
   #app {
+    height: 100%;
+  }
+  #app .top-loading {
+    height: 100%;
+  }
+  #app .top-loading .ant-spin-container {
     height: 100%;
   }
 </style>
