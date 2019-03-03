@@ -95,6 +95,7 @@
         </div>
       </template>
       <template slot="action" slot-scope="text, record, index">
+        <a-switch checkedChildren="开" unCheckedChildren="关" @change="(checked) => switchChange(checked, record)"></a-switch>
         <div class="editable-row-operations">
           <span v-if="record.editable">
             <a @click="() => save(record)">保存</a>
@@ -219,6 +220,9 @@ export default {
     },
     cancel (row) {
       row.editable = false
+    },
+    switchChange (checked, record) {
+      console.log('checked', checked, record)
     },
 
     onSelectChange (selectedRowKeys, selectedRows) {
