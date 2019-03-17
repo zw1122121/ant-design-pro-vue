@@ -80,9 +80,27 @@ export const asyncRouterMap = [
           {
             path: '/list/query-list',
             name: 'QueryListWrapper',
-            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+            hideChildrenInMenu: true,
             component: () => import('@/views/list/TableList'),
-            meta: { title: '查询表格', keepAlive: true, permission: [ 'table' ] }
+            meta: { title: '查询表格', keepAlive: true, permission: [ 'table' ] },
+            redirect: {
+              name: 'QueryList',
+              params: { page: 1 }
+            },
+            children: [
+              {
+                path: '/list/query-list/:page([1-9]\\d*)?',
+                name: 'QueryList',
+                component: () => import('@/views/list/table/List'),
+                meta: { title: '查询表格', hidden: true, keepAlive: true, permission: [ 'table' ] }
+              },
+              {
+                path: '/list/query-list/edit/:id([1-9]\\d*)?',
+                name: 'QueryListEdit',
+                component: () => import('@/views/list/table/Edit'),
+                meta: { title: '编辑', hidden: true, keepAlive: true, permission: [ 'table' ] }
+              }
+            ]
           },
           {
             path: '/list/tree-list',
@@ -197,13 +215,13 @@ export const asyncRouterMap = [
             path: '/result/success',
             name: 'ResultSuccess',
             component: () => import(/* webpackChunkName: "result" */ '@/views/result/Success'),
-            meta: { title: '成功', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
+            meta: { title: '成功', hiddenHeaderContent: true, permission: [ 'result' ] }
           },
           {
             path: '/result/fail',
             name: 'ResultFail',
             component: () => import(/* webpackChunkName: "result" */ '@/views/result/Error'),
-            meta: { title: '失败', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
+            meta: { title: '失败', hiddenHeaderContent: true, permission: [ 'result' ] }
           }
         ]
       },
@@ -255,7 +273,7 @@ export const asyncRouterMap = [
             path: '/account/settings',
             name: 'settings',
             component: () => import('@/views/account/settings/Index'),
-            meta: { title: '个人设置', hideHeader: true, permission: [ 'user' ] },
+            meta: { title: '个人设置', hideHeader: true, keepAlive: true, permission: [ 'user' ] },
             redirect: '/account/settings/base',
             hideChildrenInMenu: true,
             children: [
@@ -263,7 +281,7 @@ export const asyncRouterMap = [
                 path: '/account/settings/base',
                 name: 'BaseSettings',
                 component: () => import('@/views/account/settings/BaseSetting'),
-                meta: { title: '基本设置', hidden: true, permission: [ 'user' ] }
+                meta: { title: '基本设置', hidden: true, keepAlive: true, permission: [ 'user' ] }
               },
               {
                 path: '/account/settings/security',

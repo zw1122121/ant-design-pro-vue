@@ -62,7 +62,7 @@
     </div>
 
     <div class="table-operator">
-      <a-button type="primary" icon="plus" @click="handleEdit()">新建</a-button>
+      <a-button type="primary" icon="plus" @click="$router.push({ name: 'QueryListEdit' })">新建</a-button>
       <a-button type="dashed" @click="tableOption">{{ optionAlertShow && '关闭' || '开启' }} alert</a-button>
       <a-dropdown v-action:edit v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
@@ -216,7 +216,8 @@ export default {
     },
 
     handleEdit (record) {
-      this.$emit('onEdit', record)
+      // Object.assign({}, record)
+      this.$router.push({ name: 'QueryListEdit', params: { id: record.key } })
     },
     handleOk () {
 

@@ -37,9 +37,9 @@
         validateStatus="warning"
       >
         <a-select v-decorator="['status', {rules: [{ required: true, message: '请选择状态' }], initialValue: '1'}]">
-          <a-select-option :value="1">Option 1</a-select-option>
-          <a-select-option :value="2">Option 2</a-select-option>
-          <a-select-option :value="3">Option 3</a-select-option>
+          <a-select-option value="1">Option 1</a-select-option>
+          <a-select-option value="2">Option 2</a-select-option>
+          <a-select-option value="3">Option 3</a-select-option>
         </a-select>
       </a-form-item>
 
@@ -65,7 +65,6 @@
           showTime
           format="YYYY-MM-DD HH:mm:ss"
           placeholder="Select Time"
-          v-decorator="['updatedAt']"
         />
       </a-form-item>
 
@@ -87,17 +86,8 @@
 </template>
 
 <script>
-import moment from 'moment'
-import pick from 'lodash.pick'
-
 export default {
   name: 'TableEdit',
-  props: {
-    record: {
-      type: [Object, String],
-      default: ''
-    }
-  },
   data () {
     return {
       labelCol: {
@@ -118,17 +108,14 @@ export default {
       id: 0
     }
   },
-  // beforeCreate () {
-  //   this.form = this.$form.createForm(this)
-  // },
   mounted () {
-    this.$nextTick(() => {
-      this.loadEditInfo(this.record)
-    })
+    this.loadEditInfo()
   },
   methods: {
     handleGoBack () {
-      this.$emit('onGoBack')
+      // TODO
+      // 改为动态组件时应该把这个方法派发出去，交由父组件处理
+      this.$router.back()
     },
     handleSubmit () {
       const { form: { validateFields } } = this
@@ -139,9 +126,6 @@ export default {
         }
       })
     },
-    handleGetInfo () {
-
-    },
     loadEditInfo (data) {
       const { form } = this
       // ajax
@@ -149,10 +133,7 @@ export default {
       new Promise((resolve) => {
         setTimeout(resolve, 1500)
       }).then(() => {
-        const formData = pick(data, ['no', 'callNo', 'status', 'description', 'updatedAt'])
-        formData.updatedAt = moment(data.updatedAt)
-        console.log('formData', formData)
-        form.setFieldsValue(formData)
+        form.setFieldsValue({ no: '1', callNo: '999' })
       })
     }
   }
