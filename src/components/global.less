@@ -1,12 +1,13 @@
 @import './index.less';
 
-html {
-  overflow: auto;
+html, body {
+  // overflow: auto;
+  height: 100%;
 }
 
 body {
   // 打开滚动条固定显示
-  overflow-y: scroll;
+  // overflow-y: scroll;
 
   &.colorWeak {
     filter: invert(80%);
@@ -17,8 +18,8 @@ body {
 }
 
 .layout.ant-layout {
-  height: auto;
-  overflow-x: hidden;
+  // height: auto;
+  // overflow-x: hidden;
 
   &.mobile,
   &.tablet {

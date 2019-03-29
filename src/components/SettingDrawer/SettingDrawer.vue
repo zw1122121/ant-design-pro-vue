@@ -1,13 +1,10 @@
 <template>
-  <div class="setting-drawer" ref="settingDrawer">
+  <div class="setting-drawer">
     <a-drawer
-      width="300"
+      :width="300"
       placement="right"
-      :closable="false"
       @close="onClose"
       :visible="visible"
-      :getContainer="() => $refs.settingDrawer"
-      :style="{}"
     >
       <div class="setting-drawer-index-content">
 
@@ -187,14 +184,10 @@ export default {
       baseConfig: Object.assign({}, config)
     }
   },
-  watch: {
-
-  },
   mounted () {
-    const vm = this
-    setTimeout(() => {
-      vm.visible = false
-    }, 16)
+    requestAnimationFrame(() => {
+      this.visible = false
+    })
     // 当主题色不是默认色时，才进行主题编译
     if (this.primaryColor !== config.primaryColor) {
       updateTheme(this.primaryColor)

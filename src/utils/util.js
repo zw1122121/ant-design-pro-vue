@@ -22,27 +22,29 @@ export function triggerWindowResizeEvent () {
 
 export function handleScrollHeader (callback) {
   let timer = 0
-
+  console.log('handleScrollHeader')
   let beforeScrollTop = window.pageYOffset
   callback = callback || function () {}
-  window.addEventListener(
+  const el = document.querySelector('.ant-layout.layout')
+  console.log(el)
+  document.addEventListener(
     'scroll',
     event => {
+      console.log('event')
       clearTimeout(timer)
       timer = setTimeout(() => {
         let direction = 'up'
         const afterScrollTop = window.pageYOffset
         const delta = afterScrollTop - beforeScrollTop
+        console.log('scroll:', afterScrollTop, delta)
         if (delta === 0) {
-          return false
+          return
         }
         direction = delta > 0 ? 'down' : 'up'
         callback(direction)
         beforeScrollTop = afterScrollTop
       }, 50)
-    },
-    false
-  )
+    }, { passive: true })
 }
 
 /**
