@@ -14,9 +14,12 @@ import { axios } from '@/utils/request'
  */
 export function login (parameter) {
   return axios({
-    url: '/auth/login',
+    url: '/login',
     method: 'post',
-    data: parameter
+    data: parameter,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
   })
 }
 
@@ -42,6 +45,26 @@ export function logout () {
   return axios({
     url: '/auth/logout',
     method: 'post',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+}
+
+export function getRole () {
+  return axios({
+    url: 'requireRole',
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+}
+
+export function getPermission () {
+  return axios({
+    url: 'requirePermission',
+    method: 'get',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
     }

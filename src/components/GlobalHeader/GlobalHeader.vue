@@ -14,8 +14,9 @@
           <div class="header-index-wide">
             <div class="header-index-left">
               <logo class="top-nav-header" :show-title="device !== 'mobile'"/>
-              <s-menu v-if="device !== 'mobile'" mode="horizontal" :menu="menus" :theme="theme" />
-              <a-icon v-else class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle" />
+              <pop-menu :style="{'margin-left': '100px'}"></pop-menu>
+              <!-- <s-menu v-if="device !== 'mobile'" mode="horizontal" :menu="menus" :theme="theme" /> -->
+              <!-- <a-icon v-else class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle" /> -->
             </div>
             <user-menu class="header-index-right"></user-menu>
           </div>
@@ -30,13 +31,15 @@ import UserMenu from '../tools/UserMenu'
 import SMenu from '../Menu/'
 import Logo from '../tools/Logo'
 import { mixin } from '@/utils/mixin'
+import PopMenu from '../Menu/PopMenu'
 
 export default {
   name: 'GlobalHeader',
   components: {
     UserMenu,
     SMenu,
-    Logo
+    Logo,
+    PopMenu
   },
   mixins: [mixin],
   props: {
